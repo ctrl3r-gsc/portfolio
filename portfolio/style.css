@@ -1,0 +1,145 @@
+:root {
+  --bg: #0a0a0a;
+  --text: #ffffff;
+  --accent: #00e0ff;
+  --muted: #b5b5b5;
+  --border: #1f1f1f;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+#bg-gradient {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -3;
+}
+
+.noise {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 0.5px, transparent 0.5px);
+  background-size: 4px 4px;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.cursor {
+  position: fixed;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 100;
+  transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
+}
+
+.cursor.active {
+  width: 34px;
+  height: 34px;
+  background: rgba(0, 224, 255, 0.15);
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 6vw;
+  background: rgba(10, 10, 10, 0.72);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.logo { color: var(--text); text-decoration: none; font-weight: 600; }
+.top-nav { display: flex; gap: 1rem; flex-wrap: wrap; }
+.top-nav a { color: var(--muted); text-decoration: none; transition: color .25s ease; }
+.top-nav a:hover { color: var(--accent); }
+
+.section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 4.5rem 6vw;
+  will-change: transform;
+  transform: translate3d(0, var(--parallax-y, 0), 0);
+}
+.hero {
+  min-height: 88vh;
+  display: grid;
+  align-items: center;
+  position: relative;
+}
+
+#webgl-hero {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.85;
+  border-radius: 18px;
+}
+
+.eyebrow { color: var(--accent); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+h1,h2,h3 { line-height: 1.2; margin: 0 0 1rem; }
+h1 { font-size: clamp(2rem, 6vw, 3.6rem); }
+h2 { font-size: clamp(1.5rem, 4vw, 2.4rem); }
+.subtitle,.tagline { color: var(--muted); max-width: 680px; }
+
+.button-row { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.8rem; }
+.btn {
+  border: 1px solid var(--accent);
+  color: var(--text);
+  text-decoration: none;
+  padding: .65rem 1rem;
+  border-radius: 999px;
+  transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 0 18px rgba(0,224,255,.25); background: rgba(0,224,255,.08); }
+
+.text-block,.card,.case-card {
+  border: 1px solid var(--border);
+  background: rgba(15, 15, 15, 0.85);
+  border-radius: 14px;
+  padding: 1.25rem;
+  backdrop-filter: blur(5px);
+}
+.section-subtitle { color: var(--accent); }
+.section-lead { color: var(--muted); }
+.pill-list,.simple-list { list-style: none; padding: 0; margin: 1rem 0 0; }
+.pill-list { display: flex; flex-wrap: wrap; gap: .65rem; }
+.pill-list li { border: 1px solid var(--border); border-radius: 999px; padding: .45rem .8rem; background: #101010; }
+.simple-list li { margin-bottom: .4rem; }
+.grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.case-card { transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+.case-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 16px 30px rgba(0,0,0,.35); }
+.footer { color: var(--muted); text-align: center; padding-top: 0; }
+
+.reveal {
+  opacity: 0;
+  filter: blur(6px);
+  transition: opacity .8s ease, filter .8s cubic-bezier(.22,.61,.36,1);
+}
+.reveal.visible { opacity: 1; filter: blur(0); }
+
+@media (max-width: 760px) {
+  body { cursor: auto; }
+  .cursor { display: none; }
+  .site-header { align-items: flex-start; flex-direction: column; gap: .6rem; }
+  .section { padding: 3.5rem 1.2rem; }
+}
